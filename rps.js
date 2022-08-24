@@ -27,9 +27,11 @@ function game(n) {
     let p1_score = 0;
     let p2_score = 0;
     for (let i = 0 ; i < n; ) {
-        let p1 = prompt("Rock, Paper, or Scissors")
+        let p1 = prompt("Rock, Paper, or Scissor")
         console.log(p1);
-        console.log(playRound(p1, getComputerChoice()))
+        if (p1 == null) {
+            break;
+        }
         let [results, msg] = playRound(p1, getComputerChoice())
         if (results == 0) {
             alert(msg);
@@ -41,10 +43,13 @@ function game(n) {
         } else if (results == 2) {
             alert(msg);
             p1_score++;
-        } else if (result == 3) {
+        } else if (results == 3) {
             alert(msg)
             p2_score++;
         }
         i++;
     }
+    alert(`Final score: Player: ${p1_score} , Computer: ${p2_score}`)
 }
+//game(5);
+

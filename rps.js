@@ -51,5 +51,16 @@ function game(n) {
     }
     alert(`Final score: Player: ${p1_score} , Computer: ${p2_score}`)
 }
-//game(5);
+
+function gameStart() {
+    let games = prompt("How many game do you want to play?");
+    games = parseInt(games);
+    if (games) {
+        game(games);
+    } else {
+        alert("not a number");
+    }
+}
+
+gameStart();
 

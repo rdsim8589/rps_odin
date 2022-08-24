@@ -24,8 +24,8 @@ function playRound(playerSelection, computerSelection) {
   }
 
 function game(n) {
-    let p1_score = 0;
-    let p2_score = 0;
+    let p1Score = 0;
+    let p2Score = 0;
     for (let i = 0 ; i < n; ) {
         let p1 = prompt("Rock, Paper, or Scissor")
         console.log(p1);
@@ -38,18 +38,18 @@ function game(n) {
             continue;
         } else if (results == 1) {
             alert(msg)
-            p1_score++;
-            p2_score++;
+            p1Score++;
+            p2Score++;
         } else if (results == 2) {
             alert(msg);
-            p1_score++;
+            p1Score++;
         } else if (results == 3) {
             alert(msg)
-            p2_score++;
+            p2Score++;
         }
         i++;
     }
-    alert(`Final score: Player: ${p1_score} , Computer: ${p2_score}`)
+    alert(`Final score: Player: ${p1Score} , Computer: ${p2Score}`)
 }
 
 function gameStart() {

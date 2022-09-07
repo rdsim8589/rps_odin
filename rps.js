@@ -28,7 +28,6 @@ function game(n) {
     let p2Score = 0;
     for (let i = 0 ; i < n; ) {
         let p1 = prompt("Rock, Paper, or Scissor")
-        console.log(p1);
         if (p1 == null) {
             break;
         }
@@ -52,7 +51,7 @@ function game(n) {
     alert(`Final score: Player: ${p1Score} , Computer: ${p2Score}`)
 }
 
-function gameStart() {
+/* function gameStart() {
     let games = prompt("How many game do you want to play?");
     games = parseInt(games);
     if (games) {
@@ -60,7 +59,27 @@ function gameStart() {
     } else {
         alert("not a number");
     }
+} */
+
+function gameStart() {
+    const playerOptions = document.querySelectorAll("button");
+
+    playerOptions.forEach(e => {
+        e.addEventListener("click", () => {
+            // remove the div that was added with unique class
+            const remove = document.querySelector(".results");
+            if (remove) { remove.remove(); }
+
+            const value = e.attributes.getNamedItem("data-choice").value;
+            const [results, msg] = playRound(value, getComputerChoice());
+            
+            // add div with results with unique class
+            const parent = document.querySelector("body");
+            const result = document.createElement("div");
+            result.classList.add("results");
+            result.textContent = `${results}, ${msg}`
+            parent.appendChild(result)
+        });
+    });    
 }
-
 gameStart();
-

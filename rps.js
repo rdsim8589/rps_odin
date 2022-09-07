@@ -23,45 +23,21 @@ function playRound(playerSelection, computerSelection) {
     }    
   }
 
-function game(n) {
-    let p1Score = 0;
-    let p2Score = 0;
-    for (let i = 0 ; i < n; ) {
-        let p1 = prompt("Rock, Paper, or Scissor")
-        if (p1 == null) {
-            break;
-        }
-        let [results, msg] = playRound(p1, getComputerChoice())
-        if (results == 0) {
-            alert(msg);
-            continue;
-        } else if (results == 1) {
-            alert(msg)
-            p1Score++;
-            p2Score++;
-        } else if (results == 2) {
-            alert(msg);
-            p1Score++;
-        } else if (results == 3) {
-            alert(msg)
-            p2Score++;
-        }
-        i++;
+function scoreTracker(results) {
+    if (results == 1) {
+        return [0, 0];
+    } else if (results == 2) {
+        return [1, 0];
+    } else if (results == 3) {
+        return [0, 1];
     }
-    alert(`Final score: Player: ${p1Score} , Computer: ${p2Score}`)
+    return
 }
 
-/* function gameStart() {
-    let games = prompt("How many game do you want to play?");
-    games = parseInt(games);
-    if (games) {
-        game(games);
-    } else {
-        alert("not a number");
-    }
-} */
 
 function gameStart() {
+    let p1Score = 0;
+    let p2Score = 0;
     const playerOptions = document.querySelectorAll("button");
 
     playerOptions.forEach(e => {
@@ -72,13 +48,29 @@ function gameStart() {
 
             const value = e.attributes.getNamedItem("data-choice").value;
             const [results, msg] = playRound(value, getComputerChoice());
-            
-            // add div with results with unique class
-            const parent = document.querySelector("body");
-            const result = document.createElement("div");
-            result.classList.add("results");
-            result.textContent = `${results}, ${msg}`
-            parent.appendChild(result)
+
+            // check score
+            const [p1, p2] = scoreTracker(results);
+            p1Score += p1;
+            p2Score += p2;
+            console.log(`${p1Score}, ${p2Score}`);
+
+            // update DOM withs score
+            const player = document.querySelector("#player p");
+            const computer = document.querySelector("#computer p")
+            player.innerHTML = p1Score;
+            computer.innerHTML = p2Score;
+
+            // add div with resilts
+            if (p1Score == 5 || p2Score == 5) {
+                const parent = document.querySelector("body");
+                const result = document.createElement("div");
+                result.classList.add("results");
+                result.textContent = `${results}, ${msg}`
+                parent.appendChild(result)
+                p1Score = 0;
+                p2Score = 0;
+            }
         });
     });    
 }
